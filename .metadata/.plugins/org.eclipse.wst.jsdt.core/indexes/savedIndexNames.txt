@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+G:\laioffer\Jupiter\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2016663991.index
+2810428969.index
+3691049628.index
+1834700306.index
+2528811165.index
+2841052423.index

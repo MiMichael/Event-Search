@@ -1,0 +1,62 @@
+package RPC;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import entity.Item;
+import entity.Item.ItemBuilder;
+class RpcHelperTest {
+
+	@Test
+	public void testWriteJsonArray() throws JSONException {
+		Set<String> category = new HashSet<String>();
+		category.add("category one");
+		ItemBuilder oneBuilder = new ItemBuilder();
+		oneBuilder.setItemId("one");
+		oneBuilder.setName("onename");
+		oneBuilder.setRating(5.0);
+		oneBuilder.setAddress("oneaddress");
+		oneBuilder.setCategories(category);
+		oneBuilder.setImageUrl("123");
+		oneBuilder.setUrl("123");
+		oneBuilder.setDistance(20.0);
+		Item one = oneBuilder.build();
+		Item two = oneBuilder.build();
+		List<Item> listItem = new ArrayList<Item>();
+		listItem.add(one);
+		listItem.add(two);
+		
+		JSONArray jsonArray = new JSONArray();
+		jsonArray.put(one.toJSONObject());
+		jsonArray.put(two.toJSONObject());
+		HttpServletResponse response
+		JSONAssert.assertEquals(jsonArray, RpcHelper.writeJsonArray(jsonArray), true);
+		public static void writeJsonArray(HttpServletResponse response, JSONArray array) throws IOException{
+			response.setContentType("application/json");
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			PrintWriter out = response.getWriter();	
+			out.print(array);
+			out.close();
+		}
+
+	    
+	}
+
+
+}

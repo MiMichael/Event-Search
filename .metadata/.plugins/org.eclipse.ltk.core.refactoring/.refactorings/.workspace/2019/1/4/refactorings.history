@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Jupiter&apos; to &apos;Jupyter&apos;" description="Rename resource &apos;Jupiter&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Jupiter" name="Jupyter" stamp="1547943603122" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Jupyter&apos; to &apos;Jupiter&apos;" description="Rename resource &apos;Jupyter&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Jupyter" name="Jupiter" stamp="1548130272649" updateReferences="true"/>
+</session>

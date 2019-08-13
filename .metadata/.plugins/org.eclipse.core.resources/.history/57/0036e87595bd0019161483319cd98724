@@ -1,0 +1,87 @@
+package RPC;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import entity.Item;
+import entity.Item.ItemBuilder;
+class RpcHelperTest {
+
+	@Test
+	public void testWriteJsonArray() throws JSONException {
+		Set<String> category = new HashSet<String>();
+		category.add("category one");
+		Item one = new ItemBuilder()
+				.setItemId("one")
+				.setName("onename")
+				.setRating(5.0)
+				.setAddress("oneaddress")
+				.setCategories(category)
+				.setImageUrl()
+				.setUrl()
+				.setDistance()
+				.build();
+		Item one = new ItemBuilder().setItemId("one").setLatitude(33.33).setRating(5).setCategories(category).setLongitude(33.33).build();
+		Item two = new ItemBuilder().setItemId("two").setLatitude(33.33).setRating(5).setCategories(category).setLongitude(33.33).build();
+
+		Item two = new ItemBuilder().setItemId("two").setCategories(category).setLongitude(33.33).build();
+		List<Item> listItem = new ArrayList<Item>();
+		listItem.add(one);
+		listItem.add(two);
+		
+		JSONArray jsonArray = new JSONArray();
+		jsonArray.put(one.toJSONObject());
+		jsonArray.put(two.toJSONObject());
+		
+		JSONAssert.assertEquals(jsonArray, RpcHelper.getJSONArray(listItem), true);
+		public static void writeJsonArray(HttpServletResponse response, JSONArray array) throws IOException{
+			response.setContentType("application/json");
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			PrintWriter out = response.getWriter();	
+			out.print(array);
+			out.close();
+		}
+
+	    // Writes a JSONObject to http response.
+		public static void writeJsonObject(HttpServletResponse response, JSONObject obj) throws IOException {	
+			response.setContentType("application/json");
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			PrintWriter out = response.getWriter();	
+			out.print(obj);
+			out.close();
+		}
+		
+		
+		public static JSONObject readJSONObject(HttpServletRequest request) {
+			StringBuilder sBuilder = new StringBuilder();
+		    try (BufferedReader reader = request.getReader()) 	{
+			  String line = null;
+			  while((line = reader.readLine()) != null) {
+				 sBuilder.append(line);
+			  }
+			  return new JSONObject(sBuilder.toString());
+		    } catch (Exception e) {
+			 e.printStackTrace();
+		    }
+		    return new JSONObject();
+		}
+	}
+
+
+}

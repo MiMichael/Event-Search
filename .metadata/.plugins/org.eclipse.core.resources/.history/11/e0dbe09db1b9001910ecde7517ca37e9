@@ -1,0 +1,19 @@
+package db.mongodb;
+
+import java.text.ParseException;
+
+import org.bson.Document;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.IndexOptions;
+
+
+public class MongoDBTableCreation {
+	public static void main(String[] args) throws ParseException {
+		MongoClient mongoclient = new MongoClient();
+		MongoDatabase db = mongoclient.getDatabase(MongoDBUtil.DB_NAME);
+		
+	}
+
+}
